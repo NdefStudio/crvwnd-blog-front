@@ -1,10 +1,16 @@
 <template>
   <div id='header'>
-    <div class="blankspace"></div>
-    <h1 class="title">This is header</h1>
+    <svg @click="onClickHome"
+         id='rightmost'
+         class='icon'
+         aria-hidden='true'>
+      <use xlink:href='#icon-zhufang'></use>
+    </svg>
+    <div class="title">
+      <slot></slot>
+    </div>
 
     <svg @click="onClickSidebar"
-         id='rightmost'
          class='icon'
          aria-hidden='true'>
       <use xlink:href='#icon-caidan'></use>
@@ -23,6 +29,9 @@ export default {
     onClickSidebar: function() {
       this.$emit('switchSidebar')
       console.log('click button')
+    },
+    onClickHome: function() {
+      this.$router.push('/')
     }
   }
 }
@@ -33,20 +42,21 @@ export default {
   background-color: rgb(240, 240, 240);
   display: flex;
   flex-direction: row;
-  align-content: space-between;
+  justify-content: space-between;
   align-items: center;
 }
 .icon {
   font-size: 30px;
+  padding: 20px;
 }
 .blankspace {
   width: 70px;
   height: 70px;
 }
-#rightmost {
-  padding: 20px;
-}
+
 .title {
   flex: 1;
+  font-size: 30px;
+  text-align: center;
 }
 </style>

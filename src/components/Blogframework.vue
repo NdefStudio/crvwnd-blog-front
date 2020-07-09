@@ -2,23 +2,29 @@
   <div id='blogframework'>
 
     <div class='blogframework_content'>
-      <Header @switchSidebar='switchSidebar'></Header>
-      <Bloglist></Bloglist>
-      <Footer></Footer>
+      <Header @switchSidebar='switchSidebar'>
+        <p>首页</p>
+      </Header>
+      <div id='container'>
+        <Bloglist />
+      </div>
     </div>
 
-    <div @click='clickBlank'
-         class="mask"
-         v-if="sidebaropen">
-      <Sidebar class="subblock"
-               @click.native.stop='clickSidebar'></Sidebar>
-    </div>
+    <transition name='coverfade'>
+      <div @click='clickBlank'
+           class="mask"
+           v-if="sidebaropen" />
+    </transition>
+    <transition name='sidebarslide'>
+      <sidebar class="subblock"
+               @click.native.stop='clickSidebar'
+               v-if="sidebaropen" />
+    </transition>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
-import Footer from '../components/Footer'
 import Sidebar from '../components/Sidebar'
 import Bloglist from '../components/Bloglist'
 
@@ -26,7 +32,6 @@ export default {
   name: 'Blogframework',
   components: {
     Header,
-    Footer,
     Sidebar,
     Bloglist
   },
@@ -51,9 +56,32 @@ export default {
 </script>
 
 <style>
+#container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.coverfade-enter-active,
+.coverfade-leave-active {
+  transition: opacity 0.5s;
+}
+.coverfade-enter,
+.coverfade-leave-to {
+  opacity: 0;
+}
+
+.sidebarslide-enter-active,
+.sidebarslide-leave-active {
+  transition: all 0.5s;
+}
+.sidebarslide-enter,
+.sidebarslide-leave-to {
+  transform: translateX(150px);
+}
+
 .subblock {
   height: 100%;
-  width: 100px;
+  width: 150px;
   position: fixed;
   right: 0;
   background-color: rgb(245, 245, 245);

@@ -21,8 +21,8 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
+  overflow: hidden;
 }
-
 .icon {
   width: 1em;
   height: 1em;

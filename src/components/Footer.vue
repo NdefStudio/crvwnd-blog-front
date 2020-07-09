@@ -1,6 +1,6 @@
 <template>
   <div id='footer'>
-    <h3>This is footer</h3>
+    <p><b>下面没有了</b></p>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {}
 
 <style>
 #footer {
-  background-color: rgb(220, 253, 255);
+  margin-top: 200px;
+  width: 100%;
+  background-color: rgb(131, 202, 207);
+  font-size: 20px;
+  padding: 10px;
+  color: aliceblue;
 }
 </style>
