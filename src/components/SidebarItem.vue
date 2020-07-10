@@ -46,25 +46,23 @@ export default {
   width: 5px;
   height: 30px;
   position: absolute;
-  top: 14px;
   transition: all 0.3s;
+  transform: translateY(5px);
 }
 .colorblock {
   width: 140px;
-  height: 48px;
+  height: 40px;
   position: absolute;
-  top: 6px;
   opacity: 0.3;
   transition: all 0.3s;
 }
 .description {
   font-size: 28px;
   text-align: start;
-  padding-top: 10px;
-  padding-bottom: 10px;
   position: absolute;
   right: 0;
   width: 135px;
+  transform: translateY(2px);
 }
 
 #sidebaritem {

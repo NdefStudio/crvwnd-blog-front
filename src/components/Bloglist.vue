@@ -1,13 +1,16 @@
 <template>
   <div id='bloglist'>
-    <blogcard v-for='blog in blogs'
-              :key='blog.index'
-              class='mainblog'>
-      <p slot='title'>{{blog.title}}</p>
-      <article slot='main'
-               v-html='blog.html' />
-      <p slot='footer'>{{blog.footer}}</p>
-    </blogcard>
+    <div class="left-blank">
+      <blogcard v-for='(blog,index) in blogs'
+                :key='index'
+                class='mainblog'
+                @click.native='clickCard(index)'>
+        <p slot='title'>{{blog.title}}</p>
+        <article slot='main'
+                 v-html='blog.html' />
+        <p slot='footer'>{{blog.footer}}</p>
+      </blogcard>
+    </div>
     <Footer />
   </div>
 </template>
@@ -34,7 +37,8 @@ export default {
           footer: '2020/7/9 21:25'
         },
         {
-          title: '测试3',
+          title:
+            'title溢出了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
           html: `<h1>h1测试喵喵喵喵喵喵喵喵</h1>`,
           footer: '2020/7/9 21:25'
         },
@@ -45,11 +49,24 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    clickCard: function(index) {
+      this.$emit('displayCardDetail', this.blogs[index])
+      console.log('display' + index)
+    }
   }
 }
 </script>
 
 <style>
+.left-blank {
+  padding-left: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .mainblog {
   width: 80%;
   height: max-content;
@@ -58,10 +75,6 @@ export default {
 #bloglist {
   width: 100%;
   height: 100%;
-  background-color: rgb(202, 202, 202);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
 }

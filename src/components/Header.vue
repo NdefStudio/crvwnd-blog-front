@@ -6,7 +6,7 @@
          aria-hidden='true'>
       <use xlink:href='#icon-zhufang'></use>
     </svg>
-    <div class="title">
+    <div class="headertitle">
       <slot></slot>
     </div>
 
@@ -54,7 +54,7 @@ export default {
   height: 70px;
 }
 
-.title {
+.headertitle {
   flex: 1;
   font-size: 30px;
   text-align: center;
