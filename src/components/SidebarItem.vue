@@ -61,7 +61,7 @@ export default {
   text-align: start;
   position: absolute;
   right: 0;
-  width: 135px;
+  width: 185px;
   transform: translateY(2px);
 }
 

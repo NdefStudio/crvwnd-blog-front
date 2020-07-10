@@ -1,13 +1,17 @@
 <template>
   <div id='blogframework'>
-
     <div class='blogframework_content'>
       <Header @switchSidebar='switchSidebar'>
         <p>首页</p>
       </Header>
+
       <div class='container defaultbgc'>
-        <Bloglist @displayCardDetail='displayCardDetail' />
+        <transition :name="transitionName">
+          <router-view style="position:absolute"
+                       @displayCardDetail='displayCardDetail' />
+        </transition>
       </div>
+
       <div class='floatleft'>
         <Toolcard />
       </div>
@@ -38,7 +42,6 @@
 <script>
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
-import Bloglist from '../components/Bloglist'
 import BlogcardDetail from '../components/BlogcardDetail'
 import Toolcard from '../components/Toolcard'
 
@@ -47,7 +50,6 @@ export default {
   components: {
     Header,
     Sidebar,
-    Bloglist,
     BlogcardDetail,
     Toolcard
   },
@@ -56,7 +58,8 @@ export default {
       sidebaropen: false,
       coveron: false,
       blogdetail: [],
-      blogdetailopen: false
+      blogdetailopen: false,
+      transitionName: ''
     }
   },
   methods: {
@@ -65,25 +68,56 @@ export default {
       this.coveron = true
     },
     clickBlank: function() {
-      console.log('click blank')
+      //console.log('click blank')
       this.sidebaropen = false
       this.coveron = false
       this.blogdetailopen = false
     },
     clickSidebar: function() {
-      console.log('click sidebar')
+      //console.log('click sidebar')
     },
     displayCardDetail: function(blog) {
       this.coveron = true
       this.blogdetail = blog
       this.blogdetailopen = true
-      console.log('open' + blog.title)
+      //console.log('open' + blog.title)
+    }
+  },
+  // watch $route 决定使用哪种过渡,同样来自 https://juejin.im/post/5ba358a56fb9a05d2068401d
+  watch: {
+    $route(to, from) {
+      //此时假设从index页面跳转到pointList页面
+      //console.log(to) // "/pointList"
+      //console.log(from) // “/index”
+      const toDepth = to.meta.index
+      const fromDepth = from.meta.index
+      this.transitionName = toDepth > fromDepth ? 'fold-left' : 'fold-right'
     }
   }
 }
 </script>
 
 <style>
+/**
+来自 https://juejin.im/post/5ba358a56fb9a05d2068401d 的页面跳转动画
+ */
+
+.fold-left-enter-active,
+.fold-left-leave-active,
+.fold-right-enter-active,
+.fold-right-leave-active {
+  transition: all 0.3s;
+}
+.fold-left-enter,
+.fold-right-leave-to {
+  transform: translateX(100%);
+}
+
+.fold-right-enter,
+.fold-left-leave-to {
+  transform: translateX(-100%);
+}
+
 .floatleft {
   position: fixed;
   left: 20px;
@@ -142,12 +176,12 @@ export default {
 }
 .sidebarslide-enter,
 .sidebarslide-leave-to {
-  transform: translateX(150px);
+  transform: translateX(200px);
 }
 
 .subblock {
   height: 100%;
-  width: 150px;
+  width: 200px;
   position: fixed;
   right: 0;
   background-color: rgb(245, 245, 245);

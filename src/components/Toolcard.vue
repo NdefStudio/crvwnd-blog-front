@@ -21,9 +21,8 @@
       </div>
     </div>
     <transition-group name='opentool'
-                      style='min-height:5px;width:100%'>
+                      style='min-height:5px;width:100%;transform:translateX(-3px);z-index:-1;'>
       <div class="cardbgc toolitem"
-           style='z-index:-1;'
            v-if="toolopen"
            key=0>
         <div class="calendar">
@@ -112,11 +111,13 @@ export default {
   width: 100%;
   height: 5px;
   background-color: rgb(131, 230, 255);
-  z-index: -1;
 }
 
 .toolitem {
   width: 100%;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-color: rgb(131, 230, 255);
 }
 
 .opentool-move {

@@ -10,7 +10,7 @@
       <slot></slot>
     </div>
 
-    <svg @click="onClickSidebar"
+    <svg @click="onClickSidebarButton"
          class='icon'
          aria-hidden='true'>
       <use xlink:href='#icon-caidan'></use>
@@ -26,9 +26,8 @@ export default {
     return {}
   },
   methods: {
-    onClickSidebar: function() {
+    onClickSidebarButton: function() {
       this.$emit('switchSidebar')
-      console.log('click button')
     },
     onClickHome: function() {
       this.$router.push('/')

@@ -3,9 +3,10 @@
     <div class='avatar'><img src=""
            alt="头像"></div>
 
-    <SidebarItem v-for='item in items'
-                 :key='item.index'
-                 :color='item.color'>
+    <SidebarItem v-for='(item,index) in items'
+                 :key='index'
+                 :color='item.color'
+                 @click.native='clickSidebarItem(index)'>
       <p>{{item.word}}</p>
     </Sidebaritem>
   </div>
@@ -20,13 +21,42 @@ export default {
   data() {
     return {
       items: [
-        { word: '首页', color: 'background-color: rgb(65, 185, 255);' },
-        { word: '笔记', color: 'background-color: rgb(75, 40, 14);' },
-        { word: 'RP', color: 'background-color: rgb(244, 70, 239);' },
-        { word: '工具', color: 'background-color: rgb(44, 177, 41);' },
-        { word: '实验室', color: 'background-color: rgb(19, 79, 243);' },
-        { word: '关于我', color: 'background-color: rgb(97, 237, 173);' }
+        {
+          word: '首页',
+          color: 'background-color: rgb(65, 185, 255);',
+          url: '/'
+        },
+        {
+          word: '笔记',
+          color: 'background-color: rgb(75, 40, 14);',
+          url: '/note'
+        },
+        {
+          word: 'RP',
+          color: 'background-color: rgb(244, 70, 239);',
+          url: '/rp'
+        },
+        {
+          word: '工具',
+          color: 'background-color: rgb(44, 177, 41);',
+          url: '/tools'
+        },
+        {
+          word: '实验室',
+          color: 'background-color: rgb(19, 79, 243);',
+          url: '/lab'
+        },
+        {
+          word: '关于我',
+          color: 'background-color: rgb(97, 237, 173);',
+          url: '/about'
+        }
       ]
+    }
+  },
+  methods: {
+    clickSidebarItem: function(index) {
+      this.$router.push({ path: this.items[index].url })
     }
   }
 }

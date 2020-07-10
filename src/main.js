@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import "../assets/fonts/iconfont.js"
+import global from '../src/js/global.js' // eslint-disable-line
 
 Vue.config.productionTip = false
 

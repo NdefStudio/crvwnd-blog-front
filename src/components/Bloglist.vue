@@ -53,7 +53,6 @@ export default {
   methods: {
     clickCard: function(index) {
       this.$emit('displayCardDetail', this.blogs[index])
-      console.log('display' + index)
     }
   }
 }
