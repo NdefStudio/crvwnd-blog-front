@@ -1,7 +1,7 @@
 <template>
-  <div id='toolcard'
-       @mousedown.stop="mousedown">
-    <div class="cardbgc toolitem card">
+  <div id='toolcard'>
+    <div class="cardbgc toolitem card"
+         @mousedown.stop="mousedown">
       <div class="hidebar">
         <div class="blank_fill" />
         <svg @click="onClickToolbar"
@@ -28,7 +28,7 @@
         <div class="calendar">
           <calendar />
         </div>
-        <div class="toolbarend" />
+        <div class="toolbarend-s" />
       </div>
       <div class="toolbarend"
            v-else
@@ -109,8 +109,15 @@ export default {
 <style>
 .toolbarend {
   width: 100%;
-  height: 5px;
-  background-color: rgb(131, 230, 255);
+  border-style: solid;
+  border-top-style: none;
+  border-color: rgb(131, 230, 255);
+}
+
+.toolbarend-s {
+  width: 100%;
+  border-bottom-style: solid;
+  border-color: rgb(131, 230, 255);
 }
 
 .toolitem {
@@ -118,6 +125,7 @@ export default {
   border-left-style: solid;
   border-right-style: solid;
   border-color: rgb(131, 230, 255);
+  pointer-events: auto;
 }
 
 .opentool-move {
@@ -126,9 +134,10 @@ export default {
 
 .opentool-enter-active {
   transition: all 0.3s;
+  transition-delay: 0.1s;
 }
 .opentool-leave-active {
-  transition: all 0.5s;
+  transition: all 0.3s;
   position: absolute;
 }
 
@@ -177,5 +186,6 @@ export default {
   align-items: center;
   border-radius: 5px;
   position: absolute;
+  pointer-events: none;
 }
 </style>

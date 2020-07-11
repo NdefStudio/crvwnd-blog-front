@@ -4,14 +4,14 @@
     <div class="year">
       <div>
         <span class="fl"
-              @click="lastYear">«</span>
+              @click.stop="lastYear">«</span>
         <span class="fl"
-              @click="lastMonth">‹</span>
+              @click.stop="lastMonth">‹</span>
         <p>{{nowDate.year}}年{{nowDate.month+1}}月</p>
         <span class="fr"
-              @click="nextYear">»</span>
+              @click.stop="nextYear">»</span>
         <span class="fr"
-              @click="nextMonth">›</span>
+              @click.stop="nextMonth">›</span>
       </div>
     </div>
     <ul class="week">
@@ -22,8 +22,7 @@
       <li class="none-week"
           v-for="o in lastMonthDays"
           :key="o+50">{{lastMonthStartDay+o-1}}</li>
-      <li @click="clickEvent"
-          v-for="day in nowMonthDays"
+      <li v-for="day in nowMonthDays"
           :key="day"
           :class="(day==today.date&&today.month==nowDate.month&&today.year==nowDate.year)?'today':''">{{day}}</li>
       <li class="none-week"

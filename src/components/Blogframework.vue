@@ -4,8 +4,10 @@
       <Header @switchSidebar='switchSidebar'>
         <p>首页</p>
       </Header>
-
-      <div class='container defaultbgc'>
+      <div class='imgbackground'>
+        <div class="imgbackground-blur"></div>
+      </div>
+      <div class='container'>
         <transition :name="transitionName">
           <router-view style="position:absolute"
                        @displayCardDetail='displayCardDetail' />
@@ -101,6 +103,26 @@ export default {
 /**
 来自 https://juejin.im/post/5ba358a56fb9a05d2068401d 的页面跳转动画
  */
+
+.imgbackground-blur {
+  background: url('../../assets/img/68296699_p0_master1200.jpg') no-repeat;
+  background-position: 0, -200px;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  filter: blur(3px);
+}
+.imgbackground {
+  background: url('../../assets/img/68296699_p0_master1200.jpg') no-repeat;
+  background-position: 0, -200px;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -11;
+}
 
 .fold-left-enter-active,
 .fold-left-leave-active,

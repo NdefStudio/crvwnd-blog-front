@@ -1,6 +1,11 @@
 <template>
-  <div id='bloglist'>
-    <div class="left-blank">
+  <div id='bloglist'
+       v-infinite-scroll="loadMore"
+       infinite-scroll-disabled='stopload'
+       infinite-scroll-distance="10">
+    <transition-group tag='div'
+                      name='cardslide'
+                      class="left-blank">
       <blogcard v-for='(blog,index) in blogs'
                 :key='index'
                 class='mainblog'
@@ -10,8 +15,10 @@
                  v-html='blog.html' />
         <p slot='footer'>{{blog.footer}}</p>
       </blogcard>
-    </div>
-    <Footer />
+    </transition-group>
+    <div class='loading'
+         v-if="loading"></div>
+    <Footer :visible='stopload' />
   </div>
 </template>
 
@@ -25,40 +32,61 @@ export default {
   },
   data() {
     return {
-      blogs: [
-        {
-          title: '测试',
-          html: `<p>这是用v-html动态插入的html语句，为后面加图片和markdown解析做准备。这是用v-html动态插入的html语句，为后面加图片和markdown解析做准备。这是用v-html动态插入的html语句，为后面加图片和markdown解析做准备。这是用v-html动态插入的html语句，为后面加图片和markdown解析做准备。这是用v-html动态插入的html语句，为后面加图片和markdown解析做准备</p><p>这是分段的演示部分</p>`,
-          footer: '2020/7/9 21:25'
-        },
-        {
-          title: '测试2',
-          html: `<p>这是第二张card</p>`,
-          footer: '2020/7/9 21:25'
-        },
-        {
-          title:
-            'title溢出了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊',
-          html: `<h1>h1测试喵喵喵喵喵喵喵喵</h1>`,
-          footer: '2020/7/9 21:25'
-        },
-        {
-          title: '测试4',
-          html: `<h1>要溢出屏幕了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</h1>`,
-          footer: '2020/7/9 21:25'
-        }
-      ]
+      blogs: [],
+      loaded: 0,
+      stopload: false,
+      loading: false
     }
   },
+  mounted() {},
   methods: {
     clickCard: function(index) {
       this.$emit('displayCardDetail', this.blogs[index])
+    },
+    loadBlog: function(num) {
+      this.$myaxios
+        .get(this.global.apiserver + 'blog', {
+          params: {
+            load: num, //每次同时加载的数量
+            pos: this.loaded
+          }
+        })
+        .then(response => {
+          if (response.data.bloglist.length < num) {
+            this.stopload = true
+          } else {
+            this.stopload = false
+          }
+          for (var i in response.data.bloglist) {
+            this.blogs.push(response.data.bloglist[i])
+            this.loaded++
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    loadMore: function() {
+      this.loading = true
+      //this.stopload = true
+      this.loadBlog(5)
     }
   }
 }
 </script>
 
 <style>
+.cardslide-enter-active,
+.cardslide-leave-active {
+  transition: all 0.5s;
+}
+
+.cardslide-enter,
+.cardslide-leave-to {
+  transform: translateY(100px);
+  opacity: 0;
+}
+
 .left-blank {
   padding-left: 25%;
   display: flex;
