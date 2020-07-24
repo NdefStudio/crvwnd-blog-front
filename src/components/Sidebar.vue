@@ -9,6 +9,11 @@
                  @click.native='clickSidebarItem(index)'>
       <p>{{item.word}}</p>
     </Sidebaritem>
+    <SidebarItem v-if='admin'
+                 :color='manage.color'
+                 @click.native="clickManage">
+      <p>{{manage.word}}</p>
+    </SidebarItem>
   </div>
 </template>
 
@@ -42,21 +47,48 @@ export default {
           url: '/tools'
         },
         {
-          word: '实验室',
+          word: '艺术（?',
           color: 'background-color: rgb(19, 79, 243);',
-          url: '/lab'
+          url: '/Art'
         },
         {
           word: '关于我',
           color: 'background-color: rgb(97, 237, 173);',
           url: '/about'
         }
-      ]
+      ],
+      manage: {
+        word: '管理',
+        color: 'background-color: rgb(0,0,0);',
+        url: '/manage'
+      },
+      admin: false
     }
+  },
+  mounted() {
+    this.$store
+      .dispatch('checkToken')
+      .then(() => {
+        this.admin = true
+      })
+      .catch(err => {
+        this.admin = false
+        console.log(err)
+      })
   },
   methods: {
     clickSidebarItem: function(index) {
       this.$router.push({ path: this.items[index].url })
+    },
+    clickManage: function() {
+      this.$store
+        .dispatch('checkToken')
+        .then(() => {
+          this.$router.push({ path: this.manage.url })
+        })
+        .catch(err => {
+          console.log(err) //登录失败提示错误，这里用的是message，考虑自己做一个toast效果（反正也不难）
+        })
     }
   }
 }

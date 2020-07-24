@@ -1,16 +1,18 @@
 <template>
   <div id='header'>
-    <svg @click="onClickHome"
+    <svg @click="clickHome"
          id='rightmost'
          class='icon'
          aria-hidden='true'>
       <use xlink:href='#icon-zhufang'></use>
     </svg>
-    <div class="headertitle">
+
+    <div class="headertitle"
+         @click="clickHeaderTitle">
       <slot></slot>
     </div>
 
-    <svg @click="onClickSidebarButton"
+    <svg @click="clickSidebarButton"
          class='icon'
          aria-hidden='true'>
       <use xlink:href='#icon-caidan'></use>
@@ -23,15 +25,27 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      clicktitle: 0
+    }
   },
   methods: {
-    onClickSidebarButton: function() {
+    clickSidebarButton: function() {
       this.$emit('switchSidebar')
     },
-    onClickHome: function() {
-      this.$router.push('/')
+    clickHome: function() {
+      this.$router.push({ name: 'Blog' })
+    },
+    clickHeaderTitle: function() {
+      if (++this.clicktitle >= 4) {
+        this.$router.push('/login')
+        this.clicktitle = 0
+      }
+      console.log(this.clicktitle)
     }
+  },
+  mounted() {
+    this.clicktitle = 0
   }
 }
 </script>

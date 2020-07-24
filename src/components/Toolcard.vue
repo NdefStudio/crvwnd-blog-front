@@ -4,11 +4,13 @@
          @mousedown.stop="mousedown">
       <div class="hidebar">
         <div class="blank_fill" />
-        <svg @click="onClickToolbar"
-             class='icon'
-             aria-hidden='true'>
-          <use xlink:href='#icon-shuju6'></use>
-        </svg>
+        <div :class="toolopen?`rotate rotateblock`:`rotateblock`"
+             @click="onClickToolbar">
+          <svg class='icon'
+               aria-hidden='true'>
+            <use xlink:href='#icon-shuju6'></use>
+          </svg>
+        </div>
       </div>
       <div class='timecard'>
         <div class="timenumber">{{hour}}</div>
@@ -89,8 +91,8 @@ export default {
       var distanceY = event.clientY - this.selectElement.offsetTop
       // alert(distanceX)
       // alert(distanceY)
-      console.log(distanceX)
-      console.log(distanceY)
+      //console.log(distanceX)
+      //console.log(distanceY)
       document.onmousemove = function(ev) {
         var oevent = ev || event
         div1.style.left = oevent.clientX - distanceX + 'px'
@@ -107,6 +109,14 @@ export default {
 </script>
 
 <style>
+.rotateblock {
+  transition: all 0.3s;
+}
+
+.rotate {
+  transform: rotateZ(360deg);
+}
+
 .toolbarend {
   width: 100%;
   border-style: solid;
@@ -179,7 +189,7 @@ export default {
 }
 
 #toolcard {
-  width: 100%;
+  width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

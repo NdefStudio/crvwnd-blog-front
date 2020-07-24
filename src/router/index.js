@@ -3,10 +3,9 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
     path: '/',
-    name: 'Homepage',
     component: () => import(/* webpackChunkName: "about" */ '../components/Blogframework'),
     children: [{
       path: '',
@@ -26,25 +25,38 @@ const routes = [
       meta: { index: 2 }
     },
     {
-      path: 'lab',
-      name: 'Lab',
-      component: () => import('../components/Labpage'),
+      path: 'art',
+      name: 'Art',
+      component: () => import('../components/Artpage'),
       meta: { index: 4 }
     }, {
       path: 'tools',
       name: 'Tools',
       component: () => import('../components/Toolpage'),
       meta: { index: 3 }
-    }
+    }, {
+      path: 'manage',
+      name: 'Manage',
+      component: () => import('../components/Managepage'),
+    },
     ]
   },
   {
-    path: 'about',
+    path: '/about',
     name: 'About',
     component: () => import('../components/About'),
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/Loginpage'),
+  },
+
+  { path: '/404', name: '404', component: () => import('../components/404page') },
+  { path: '*', redirect: '/404', hidden: true }
 
 ]
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

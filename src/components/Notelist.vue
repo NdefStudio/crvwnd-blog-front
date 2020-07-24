@@ -1,9 +1,16 @@
 <template>
-  <div id='notelist'></div>
+  <div id='notelist'>
+    <Keepout />
+  </div>
 </template>
 
 <script>
-export default {}
+import Keepout from './Keep-out'
+export default {
+  components: {
+    Keepout
+  }
+}
 </script>
 
 <style>

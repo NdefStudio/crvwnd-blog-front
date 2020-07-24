@@ -13,7 +13,7 @@
         <p slot='title'>{{blog.title}}</p>
         <article slot='main'
                  v-html='blog.html' />
-        <p slot='footer'>{{blog.footer}}</p>
+        <p slot='footer'>{{blog.date}}</p>
       </blogcard>
     </transition-group>
     <div class='loading'
@@ -45,8 +45,9 @@ export default {
     },
     loadBlog: function(num) {
       this.$myaxios
-        .get(this.global.apiserver + 'blog', {
+        .get(this.$store.state.apiserver + 'blog', {
           params: {
+            nowdate: new Date(),
             load: num, //每次同时加载的数量
             pos: this.loaded
           }

@@ -30,4 +30,11 @@ export default {
   fill: currentColor;
   overflow: hidden;
 }
+.defaultbgc {
+  background-color: rgb(202, 202, 202);
+}
+
+.cardbgc {
+  background-color: rgb(250, 250, 250);
+}
 </style>

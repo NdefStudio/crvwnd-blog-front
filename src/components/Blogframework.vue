@@ -35,7 +35,7 @@
         <p slot='title'>{{blogdetail.title}}</p>
         <article slot='main'
                  v-html='blogdetail.html'></article>
-        <p slot='footer'>{{blogdetail.footer}}</p>
+        <p slot='footer'>{{blogdetail.date}}</p>
       </BlogcardDetail>
     </transition>
   </div>
@@ -147,24 +147,17 @@ export default {
   width: 20%;
 }
 
-.defaultbgc {
-  background-color: rgb(202, 202, 202);
-}
-
-.cardbgc {
-  background-color: rgb(250, 250, 250);
-}
-
 .blank {
   width: 25%;
 }
 
 .detail {
   position: absolute;
-  left: 50%;
+  left: 10%;
   top: 50%;
+  transform: translateY(-50%);
   width: 80%;
-  transform: translate(-50%, -50%);
+  z-index: 11;
 }
 
 .BlogcardDetailfade-enter-active,
@@ -182,6 +175,7 @@ export default {
   overflow: hidden;
   display: flex;
   flex-direction: row;
+  z-index: 0;
 }
 .coverfade-enter-active,
 .coverfade-leave-active {
@@ -207,6 +201,7 @@ export default {
   position: fixed;
   right: 0;
   background-color: rgb(245, 245, 245);
+  z-index: 10;
 }
 #blogframework {
   width: 100%;
@@ -220,6 +215,7 @@ export default {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.3);
+  z-index: 9;
 }
 .blogframework_content {
   width: 100%;
