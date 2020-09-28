@@ -1,5 +1,5 @@
 <template>
-  <div id='bloglist'
+  <div id='blogpage'
        v-infinite-scroll="loadMore"
        infinite-scroll-disabled='stopload'
        infinite-scroll-distance="10">
@@ -28,31 +28,31 @@ import Footer from '../components/Footer'
 export default {
   components: {
     Blogcard,
-    Footer
+    Footer,
   },
   data() {
     return {
       blogs: [],
       loaded: 0,
       stopload: false,
-      loading: false
+      loading: false,
     }
   },
   mounted() {},
   methods: {
-    clickCard: function(index) {
+    clickCard: function (index) {
       this.$emit('displayCardDetail', this.blogs[index])
     },
-    loadBlog: function(num) {
+    loadBlog: function (num) {
       this.$myaxios
         .get(this.$store.state.apiserver + 'blog', {
           params: {
             nowdate: new Date(),
             load: num, //每次同时加载的数量
-            pos: this.loaded
-          }
+            pos: this.loaded,
+          },
         })
-        .then(response => {
+        .then((response) => {
           if (response.data.bloglist.length < num) {
             this.stopload = true
           } else {
@@ -63,16 +63,16 @@ export default {
             this.loaded++
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     },
-    loadMore: function() {
+    loadMore: function () {
       this.loading = true
       //this.stopload = true
       this.loadBlog(5)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -100,7 +100,7 @@ export default {
   height: max-content;
 }
 
-#bloglist {
+#blogpage {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -111,7 +111,7 @@ export default {
   width: calc(100% + 19px); /* 把滚动条挤出画面，给火狐准备的究极方案 */
 }
 
-#bloglist::-webkit-scrollbar {
+#blogpage::-webkit-scrollbar {
   display: none;
 }
 </style>

@@ -10,7 +10,7 @@ export const routes = [
     children: [{
       path: '',
       name: 'Blog',
-      component: () => import('../components/Bloglist'),
+      component: () => import('../components/Blogpage'),
       meta: { index: 0 }
     }, {
       path: 'note',

@@ -42,7 +42,7 @@ export default {
     return {
       selectDate: [], //选择日期列表
       nowDate: this.getDate(new Date()), //当前设置时间 默认为当前系统时间
-      today: {}
+      today: {},
     }
   },
   computed: {
@@ -57,7 +57,7 @@ export default {
     },
     nowMonthDays() {
       return this.calcDays(this.nowDate.year, this.nowDate.month)
-    }
+    },
   },
   created() {
     if (this.setDate) {
@@ -67,7 +67,7 @@ export default {
       year: this.nowDate.year,
       month: this.nowDate.month,
       day: this.nowDate.day,
-      date: this.nowDate.date
+      date: this.nowDate.date,
     }
   },
   methods: {
@@ -76,7 +76,7 @@ export default {
         year: date.getFullYear(),
         month: date.getMonth(),
         day: date.getDay(),
-        date: date.getDate()
+        date: date.getDate(),
       }
     },
     formatWeek(day) {
@@ -161,11 +161,11 @@ export default {
           this.nowDate.month,
           e.target.innerText
         ).getDay(),
-        day: Number(e.target.innerText)
+        day: Number(e.target.innerText),
       }
       this.$emit('click-event', date)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -202,7 +202,7 @@ export default {
   border-bottom: 0.5px solid #ddd;
   margin-bottom: 5px;
 }
-ul > li {
+.calendar-container ul > li {
   font-size: 18px;
   width: calc(100% / 7);
   height: 34px;

@@ -59,6 +59,7 @@ export default {}
 .main_d {
   font-size: 20px;
   padding: 10px;
+  overflow-y: auto;
 }
 .footer_d {
   font-size: 18px;

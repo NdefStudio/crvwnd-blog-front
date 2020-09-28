@@ -27,11 +27,16 @@
 
 <script>
 export default {
-  methods: {}
+  methods: {},
 }
 </script>
 
 <style>
+ul,
+ol {
+  margin-left: 50px;
+}
+
 #blogcard {
   border-color: darkgray;
   border-radius: 10px;
@@ -41,8 +46,7 @@ export default {
   margin-top: 40px;
 }
 #blogcard:hover {
-  padding-right: 110px;
-  transform: translateX(-50px);
+  transform: translateX(-100px);
 }
 .title {
   font-size: 32px;
@@ -71,7 +75,10 @@ export default {
 .blank_fill {
   flex: 1;
 }
-.chinesespace {
+.chinesespace > article > p {
   text-indent: 2em;
+}
+.chinesespace > article > li {
+  text-indent: 0;
 }
 </style>

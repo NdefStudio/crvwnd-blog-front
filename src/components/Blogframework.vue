@@ -53,7 +53,7 @@ export default {
     Header,
     Sidebar,
     BlogcardDetail,
-    Toolcard
+    Toolcard,
   },
   data() {
     return {
@@ -61,29 +61,29 @@ export default {
       coveron: false,
       blogdetail: [],
       blogdetailopen: false,
-      transitionName: ''
+      transitionName: '',
     }
   },
   methods: {
-    switchSidebar: function() {
+    switchSidebar: function () {
       this.sidebaropen = true
       this.coveron = true
     },
-    clickBlank: function() {
+    clickBlank: function () {
       //console.log('click blank')
       this.sidebaropen = false
       this.coveron = false
       this.blogdetailopen = false
     },
-    clickSidebar: function() {
+    clickSidebar: function () {
       //console.log('click sidebar')
     },
-    displayCardDetail: function(blog) {
+    displayCardDetail: function (blog) {
       this.coveron = true
       this.blogdetail = blog
       this.blogdetailopen = true
       //console.log('open' + blog.title)
-    }
+    },
   },
   // watch $route 决定使用哪种过渡,同样来自 https://juejin.im/post/5ba358a56fb9a05d2068401d
   watch: {
@@ -94,8 +94,8 @@ export default {
       const toDepth = to.meta.index
       const fromDepth = from.meta.index
       this.transitionName = toDepth > fromDepth ? 'fold-left' : 'fold-right'
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -157,6 +157,7 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   width: 80%;
+  max-height: 80%;
   z-index: 11;
 }
 
