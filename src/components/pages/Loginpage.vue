@@ -28,25 +28,25 @@
 </template>
 
 <script>
-import Toast from './Toast'
+import Toast from '../comps/Toast'
 
 export default {
   data() {
     return {
       acc: '',
       pass: '',
-      wronginfo: false
+      wronginfo: false,
     }
   },
   components: { Toast },
   methods: {
-    inputAccount: function(e) {
+    inputAccount: function (e) {
       this.acc = e.target.value
     },
-    inputPassword: function(e) {
+    inputPassword: function (e) {
       this.pass = e.target.value
     },
-    login: function() {
+    login: function () {
       //console.log(this.acc)
       //console.log(this.pass)
       //进行验证
@@ -55,13 +55,13 @@ export default {
         .then(() => {
           this.$router.push({ path: '/manage' })
         })
-        .catch(err => {
+        .catch((err) => {
           this.wronginfo = true
           this.$refs.toast.popToast()
           console.log(err) //登录失败提示错误，这里用的是message，考虑自己做一个toast效果（反正也不难）
         })
-    }
-  }
+    },
+  },
 }
 </script>
 

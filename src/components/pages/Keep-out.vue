@@ -227,7 +227,7 @@ export default {}
   height: 100%;
   top: 0;
   left: 0;
-  background-image: url('../../assets/img/keep-out.png');
+  background-image: url('../../../assets/img/keep-out.png');
   background-size: cover;
   background-position: center center;
 }

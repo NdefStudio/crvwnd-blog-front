@@ -15,7 +15,7 @@
       </div>
 
       <div class='floatleft'>
-        <Toolcard />
+        <Toolcard v-if="showtool" />
       </div>
     </div>
 
@@ -27,7 +27,9 @@
     <transition name='sidebarslide'>
       <sidebar class="subblock"
                @click.native.stop='clickSidebar'
-               v-if="sidebaropen" />
+               v-if="sidebaropen"
+               @switchTool="switchTool"
+               :showtool="showtool" />
     </transition>
     <transition name='BlogcardDetailfade'>
       <BlogcardDetail v-if='blogdetailopen'
@@ -42,10 +44,10 @@
 </template>
 
 <script>
-import Header from '../components/Header'
-import Sidebar from '../components/Sidebar'
-import BlogcardDetail from '../components/BlogcardDetail'
-import Toolcard from '../components/Toolcard'
+import Header from '../components/comps/Header'
+import Sidebar from '../components/comps/Sidebar'
+import BlogcardDetail from '../components/comps/BlogcardDetail'
+import Toolcard from '../components/comps/Toolcard'
 
 export default {
   name: 'Blogframework',
@@ -62,12 +64,16 @@ export default {
       blogdetail: [],
       blogdetailopen: false,
       transitionName: '',
+      showtool: true,
     }
   },
   methods: {
     switchSidebar: function () {
       this.sidebaropen = true
       this.coveron = true
+    },
+    switchTool: function () {
+      this.showtool = !this.showtool
     },
     clickBlank: function () {
       //console.log('click blank')
@@ -202,7 +208,7 @@ export default {
   position: fixed;
   right: 0;
   background-color: rgb(245, 245, 245);
-  z-index: 10;
+  z-index: 100;
 }
 #blogframework {
   width: 100%;
@@ -216,7 +222,7 @@ export default {
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.3);
-  z-index: 9;
+  z-index: 99;
 }
 .blogframework_content {
   width: 100%;

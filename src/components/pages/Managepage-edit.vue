@@ -1,5 +1,5 @@
 <template>
-  <div id='manage'>
+  <div id='edit'>
     <div class='md-input'>
       <input type="text"
              class='titleinput'
@@ -84,11 +84,6 @@ export default {
 }
 
 .md-input {
-  width: 100%;
-  height: 100%;
-}
-
-#manage {
   width: 100%;
   height: 100%;
 }

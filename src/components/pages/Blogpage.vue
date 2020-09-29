@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Blogcard from '../components/Blogcard'
-import Footer from '../components/Footer'
+import Blogcard from '../comps/Blogcard'
+import Footer from '../comps/Footer'
 export default {
   components: {
     Blogcard,
@@ -98,6 +98,7 @@ export default {
 .mainblog {
   width: 80%;
   height: max-content;
+  max-height: 350px;
 }
 
 #blogpage {

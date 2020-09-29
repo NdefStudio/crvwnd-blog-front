@@ -46,7 +46,7 @@ import Calendar from './Calendar'
 
 export default {
   components: {
-    Calendar
+    Calendar,
   },
   data() {
     return {
@@ -54,14 +54,14 @@ export default {
       selectElement: '',
       hour: '',
       min: '',
-      sec: ''
+      sec: '',
     }
   },
   created() {
     setInterval(this.getTime, 1000)
   },
   methods: {
-    getTime: function() {
+    getTime: function () {
       var _this = this
       let hh = new Date().getHours()
       let mf =
@@ -76,7 +76,7 @@ export default {
       _this.min = mf
       _this.sec = ss
     },
-    onClickToolbar: function() {
+    onClickToolbar: function () {
       this.toolopen = !this.toolopen
     },
     /*
@@ -93,18 +93,18 @@ export default {
       // alert(distanceY)
       //console.log(distanceX)
       //console.log(distanceY)
-      document.onmousemove = function(ev) {
+      document.onmousemove = function (ev) {
         var oevent = ev || event
         div1.style.left = oevent.clientX - distanceX + 'px'
         div1.style.top = oevent.clientY - distanceY + 'px'
       }
-      document.onmouseup = function() {
+      document.onmouseup = function () {
         document.onmousemove = null
         document.onmouseup = null
         div1.style.cursor = 'default'
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -163,7 +163,7 @@ export default {
 
 @font-face {
   font-family: 'LiquidCrystal';
-  src: url('../../assets/fonts/LiquidCrystal-Normal.otf');
+  src: url('../../../assets/fonts/LiquidCrystal-Normal.otf');
 }
 
 .hidebar {
@@ -189,6 +189,7 @@ export default {
 }
 
 #toolcard {
+  opacity: 0.8;
   width: 350px;
   display: flex;
   flex-direction: column;

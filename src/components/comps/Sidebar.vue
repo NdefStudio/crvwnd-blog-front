@@ -14,14 +14,21 @@
                  @click.native="clickManage">
       <p>{{manage.word}}</p>
     </SidebarItem>
+    <div v-if="showtool"
+         class="switchbutton-on"
+         @click="switchTool1"><b>隐藏工具</b></div>
+    <div v-else
+         class="switchbutton-off"
+         @click="switchTool1"><b>显示工具</b></div>
   </div>
 </template>
 
 <script>
-import SidebarItem from '../components/SidebarItem'
+import SidebarItem from '../comps/SidebarItem'
 
 export default {
   name: 'Sidebar',
+  props: ['showtool'],
   components: { SidebarItem },
   data() {
     return {
@@ -29,40 +36,40 @@ export default {
         {
           word: '首页',
           color: 'background-color: rgb(65, 185, 255);',
-          url: '/'
+          url: '/',
         },
         {
           word: '笔记',
           color: 'background-color: rgb(75, 40, 14);',
-          url: '/note'
+          url: '/note',
         },
         {
           word: 'RP',
           color: 'background-color: rgb(244, 70, 239);',
-          url: '/rp'
+          url: '/rp',
         },
         {
           word: '工具',
           color: 'background-color: rgb(44, 177, 41);',
-          url: '/tools'
+          url: '/tools',
         },
         {
           word: '艺术（?',
           color: 'background-color: rgb(19, 79, 243);',
-          url: '/Art'
+          url: '/Art',
         },
         {
           word: '关于我',
           color: 'background-color: rgb(97, 237, 173);',
-          url: '/about'
-        }
+          url: '/about',
+        },
       ],
       manage: {
         word: '管理',
         color: 'background-color: rgb(0,0,0);',
-        url: '/manage'
+        url: '/manage',
       },
-      admin: false
+      admin: false,
     }
   },
   mounted() {
@@ -71,26 +78,29 @@ export default {
       .then(() => {
         this.admin = true
       })
-      .catch(err => {
+      .catch((err) => {
         this.admin = false
         console.log(err)
       })
   },
   methods: {
-    clickSidebarItem: function(index) {
+    clickSidebarItem: function (index) {
       this.$router.push({ path: this.items[index].url })
     },
-    clickManage: function() {
+    clickManage: function () {
       this.$store
         .dispatch('checkToken')
         .then(() => {
           this.$router.push({ path: this.manage.url })
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err) //登录失败提示错误，这里用的是message，考虑自己做一个toast效果（反正也不难）
         })
-    }
-  }
+    },
+    switchTool1: function () {
+      this.$emit('switchTool')
+    },
+  },
 }
 </script>
 
@@ -105,5 +115,27 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+.switchbutton-on {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  margin: 10px;
+  height: 50px;
+  background-color: #98e68e;
+  font-size: 30px;
+  color: #000;
+}
+.switchbutton-off {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+  margin: 10px;
+  height: 50px;
+  background-color: #435145;
+  font-size: 30px;
+  color: snow;
 }
 </style>

@@ -32,8 +32,8 @@ export default {
 </script>
 
 <style>
-ul,
-ol {
+main > ul,
+main > ol {
   margin-left: 50px;
 }
 
@@ -42,6 +42,7 @@ ol {
   border-radius: 10px;
   padding: 10px;
   text-align: start;
+  overflow-wrap: normal;
   transition: all 0.3s;
   margin-top: 40px;
 }
@@ -56,7 +57,10 @@ ol {
 }
 .main {
   font-size: 20px;
+  overflow: hidden;
+  max-height: 200px;
   padding: 10px;
+  margin-bottom: 20px;
 }
 .footer {
   font-size: 18px;
